@@ -1,4 +1,5 @@
 import mysql.connector as sql
+import pwinput as pw
 
 mycon = sql.connect(host = '127.0.0.1', user = 'root', password ='', database = 'bank2_db' )
 mycursor = mycon.cursor()
@@ -35,7 +36,7 @@ mycon.autocommit = True
 # print(mycursor.rowcount, 'customer added successfully')
 # # mycon.commit()
 
-import pwinput as pw
+
 
 
 # mycursor.execute('SELECT * FROM customer_table')
@@ -56,6 +57,9 @@ import pwinput as pw
 
 
 def signin():
+    global account_balance
+    global email
+
     email = input('Email: ').strip()
     password = pw.pwinput()
 
@@ -63,4 +67,41 @@ def signin():
     value = (email, password)
     mycursor.execute(query,value)
     details = mycursor.fetchone()
-    print(details)
+    account_balance = details[2]
+    # print(details)
+
+    if details == None:
+        print('Incorrect Password or email')
+    else:
+        print('Login successful')
+
+        deposit()
+
+
+def deposit():
+
+    amount = float(input('Amount: '))
+    new_bal =  account_balance + amount
+
+    query = 'UPDATE customer_table SET account_bal = %s WHERE email = %s'
+    values = (new_bal, email)
+
+    mycursor.execute(query,values)
+    print('Deposit succesfull, your balance is now', new_bal)
+
+
+# signin()
+
+# # Delete query
+# query = 'DELETE FROM customer_table WHERE customer_id = %s'    
+# value = (1,)
+# mycursor.execute(query,value)
+# print(mycursor.rowcount, 'customer deleted successfully')
+
+
+# Drop table
+# mycursor.execute('DROP TABLE customer_table')
+    
+# Drop database
+# mycursor.execute('DROP DATABASE bank2_db')
+
