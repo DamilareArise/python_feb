@@ -1,7 +1,9 @@
 import mysql.connector as sql
 import pwinput as pw
 
+mycon = sql.connect(host = '127.0.0.1', user = 'root', password ='', ) #connection before creating database
 mycon = sql.connect(host = '127.0.0.1', user = 'root', password ='', database = 'bank2_db' )
+
 mycursor = mycon.cursor()
 mycon.autocommit = True
 
@@ -22,17 +24,17 @@ mycon.autocommit = True
 # mycursor.execute('ALTER TABLE customer_table CHANGE id customer_id INT(4) AUTO_INCREMENT')
 # mycursor.execute('ALTER TABLE customer_table ADD password VARCHAR(25)')
 
-# fullname = input('Fullname: ')
-# email = input('Email: ')
-# account_no = input('Account no: ')
-# account_bal = float(input('Balance: '))
-# password = input('Password: ')
+fullname = input('Fullname: ')
+email = input('Email: ')
+account_no = input('Account no: ')
+account_bal = float(input('Balance: '))
+password = input('Password: ')
 
-# query = 'INSERT INTO customer_table(fullname, email, account_no, account_bal, password) VALUES(%s, %s, %s, %s, %s)'
+query = 'INSERT INTO customer_table(fullname, email, account_no, account_bal, password) VALUES(%s, %s, %s, %s, %s)'
 
-# values = (fullname, email, account_no, account_bal, password)
+values = (fullname, email, account_no, account_bal, password)
 
-# mycursor.execute(query, values)
+mycursor.execute(query, values)
 # print(mycursor.rowcount, 'customer added successfully')
 # # mycon.commit()
 

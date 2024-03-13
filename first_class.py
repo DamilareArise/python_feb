@@ -882,7 +882,7 @@ class Parent:
     def describe(self):
         print(f'My name is {self.firstname} {self.surname}, I love {self.hobby}')
 
-parent = Parent()
+# parent = Parent()
 
 
 class Child(Parent):
@@ -901,7 +901,7 @@ class Child(Parent):
 
 
 
-child = Child()
+# child = Child()
 
 
 
@@ -913,4 +913,115 @@ class Grandchild(Child):
 
         # self.describe()
 
-grandchild = Grandchild()
+# grandchild = Grandchild()
+
+
+# ERROR HANDLING
+# types of error
+'''
+1. run time error
+2. compile type error
+'''
+
+
+# print(container)
+
+# container = [
+#     'Apple',
+#     'Pawpaw',
+#     'Orange',
+#     'Pear'
+# ]
+# container[5]
+
+# user = int(input('Input a number: '))
+
+
+# try:
+#     container
+# except:
+#     print('The variable is not valid')
+# else:
+#     print('The variable is valid')
+# finally:
+#     print('I would always show up if there\'s an error or not')
+
+
+# You can be specific eith the type of error to handle
+
+# try:
+#     container[5]
+
+# except NameError:
+#     print('The variable is not valid')
+
+# except IndexError:
+#     print('Index out of range')
+
+# except:
+#     print('There\'s something wrong somewhere')
+
+
+# val1 = int(input('Input Value 1: '))
+# val2 = int(input('Input Value 2: '))
+# print(val1/val2)
+
+
+# try: 
+#     val1 = int(input('Input Value 1: '))
+#     val2 = int(input('Input Value 2: '))
+    
+
+# except ValueError as v:
+#     print(v)
+#     # print('The value must be a number')
+# #     # raise TypeError ('The value must be a number')
+
+# except Exception as e:
+#     print(e)
+
+
+class Calc:
+    def __init__(self):
+        self.home()
+
+    def home(self):
+        try:
+            self.val1 = int(input('Input Value 1: '))
+            self.val2 = int(input('Input Value 2: '))
+        except Exception as e:
+            print(e)
+            self.home()
+
+        user = input('''
+        Choose Option;
+            1. Addition
+            2. Division
+        
+        Option: ''')
+
+        if user == '1':
+            self.add()
+        elif user == '2':
+            self.div()
+        else:
+            print('Invalid input')
+            self.home()
+
+    def add(self):
+        res = self.val1 + self.val2
+        print('Your answer is: ', res)
+
+    def div(self):
+        try:
+            res = self.val1 / self.val2
+        except Exception as e:
+            print(e)
+            
+        else: 
+            print('Your answer is: ', res)
+            
+        finally:
+            self.home()
+
+calculator = Calc()
