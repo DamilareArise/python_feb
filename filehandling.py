@@ -49,8 +49,8 @@ import os
 # print(os.path.exists(r'C:\python_feb\myfile2.txt'))
 
 # print(os.walk("C:\python_feb"))
-for root, folder, file in os.walk(r"C:\python_feb\newDIR"):
-    print( root, folder, file)
+# for root, folder, file in os.walk(r"C:\python_feb\newDIR"):
+#     print( root, folder, file)
 
 
 # if os.path.exists("C:\python_feb\\text2.pdf"):
@@ -85,22 +85,26 @@ for root, folder, file in os.walk(r"C:\python_feb\newDIR"):
 # # Deleting a directory
 
 import time
+def delete():
+    user = input('Path to the folder: ')
+    try:
+        os.rmdir(user)
+    except OSError:
+        print('The folder is not empty')
+        for root, folder, files in os.walk(user):
+    #         print(root)
+            print(files)
 
-# try:
-#     os.rmdir("C:\python_feb\\newDIR")
-# except OSError:
-#     print('The folder is not empty')
-#     for root, folder, files in os.walk("C:\python_feb\\newDIR"):
-#         print(files)
+            for file in files:
+                print('Deleting', file)
+                time.sleep(2)
+                os.remove(root+'\\'+file)
+                
+    #             os.remove(f"{root}\\{file}")
 
-#         for file in (files):
-#             print('Deleting', file)
-#             time.sleep(2)
-#             os.remove("C:\python_feb\\newDIR\\"+file)
-
-#     print('Deleting Directory')
-#     time.sleep(1)
-#     os.rmdir("C:\python_feb\\newDIR")
+        print('Deleting Directory')
+        time.sleep(1)
+        os.rmdir(user)
 
 # TASK2
 
@@ -114,3 +118,29 @@ import time
 #     # print(root)
 #     # print(folder)
 #     print(file)
+    
+# TASK 2
+
+file = open(r"C:\Datasets\president_height.csv", mode='rt')
+# print(file.read())
+file_list = file.readlines()
+file_list.pop(0)
+# print(file_list)
+names = []
+heights = []
+for line in file_list:
+    # print(line)
+    val = line.split(',')
+    # print(val)
+
+    height = int(val[2].strip('\n'))
+    # print(height)
+    heights.append(height)
+    names.append(val[1])
+
+# print(heights)
+# print(names)
+# max_height = max(heights)
+# index_max_height = heights.index(max_height)
+# print(index_max_height)
+# print(names[index_max_height])
