@@ -328,7 +328,7 @@ word_split = name.split()
 num = '23'
 # print(num.isalpha())
 
-# print(name.startswith('m'))
+print(name.startswith('m'))
 # print(name.endswith('food'))
 # print(name.find('MARY'))
 

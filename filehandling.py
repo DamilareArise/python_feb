@@ -107,19 +107,52 @@ def delete():
         os.rmdir(user)
 
 # TASK2
+try:
+    os.mkdir("C:\python_feb\\ROOTDIR")
+    os.mkdir("C:\python_feb\\ROOTDIR\\DIR1")
 
-# os.mkdir("C:\python_feb\\ROOTDIR")
-# os.mkdir("C:\python_feb\\ROOTDIR\\DIR1")
+    file = open('C:\python_feb\\ROOTDIR\\text.py', mode='x')
+    file = open('C:\python_feb\\ROOTDIR\\DIR1\\text.csv', mode='x')
+except FileExistsError:
+    print('Directory already exist')
 
-# file = open('C:\python_feb\\ROOTDIR\\text.py', mode='x')
-# file = open('C:\python_feb\\ROOTDIR\\DIR1\\text.csv', mode='x')
 
-# for file in os.walk('C:\python_feb\\ROOTDIR'):
-#     # print(root)
-#     # print(folder)
-#     print(file)
+def delete_multiple(directory:str):
+    try:
+        os.rmdir(directory)
+    except OSError:
+        print(directory+' Is not empty, Kindly wait as we delete its content')
+        time.sleep(2)
+        for root, folders, files in os.walk(directory):
+            for folder in folders:
+                try:
+                    os.rmdir(root+'\\'+folder)
+                except OSError:
+                    print(root+'\\'+folder+' Is not empty, Kindly wait as we delete its content')
+                    time.sleep(2)
+                    for root2, folders2, files2 in os.walk(root+'\\'+folder):
+                        for file in files2:
+                            print('Deleting '+root2+'\\'+file)
+                            time.sleep(2)
+                            os.remove(root2+'\\'+file)
+
+                print('Deleting '+ root+'\\'+folder)
+                time.sleep(2)
+                os.rmdir(root+'\\'+folder)
+
+            for file in files:
+                print('Deleting '+ root+'\\'+file)
+                time.sleep(2)
+                os.remove(root+'\\'+file)   
+
+    print('Deleting '+ directory) 
+    time.sleep(2)     
+    os.rmdir(directory)
+
+# delete_multiple(input('Directory: '))    
     
-# TASK 2
+
+# TASK 3
 
 file = open(r"C:\Datasets\president_height.csv", mode='rt')
 # print(file.read())
